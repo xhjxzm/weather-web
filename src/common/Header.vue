@@ -10,30 +10,76 @@
       <span class="temperature">{{ temperature }}&#176;</span>
       <i class="iconfont weather-icon">&#xe7a4;</i>
     </div>
-    <div class="menubtn">
+    <div
+      class="menubtn"
+      @mouseenter="handleMenuShow"
+      @mouseleave="handleMenuHide">
       <i class="iconfont menu-icon">&#xe608;</i>
       更多
     </div>
+    <fade-animation>
+      <div
+        class="menu"
+        v-if="showMenu"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
+        ref="menuPanel">
+        <ul>
+          <router-link to="/"><li>首页</li></router-link>
+          <router-link to="/"><li>下载</li></router-link>
+          <router-link to="/"><li>天气服务</li></router-link>
+          <router-link to="/"><li>资讯</li></router-link>
+          <router-link to="/"><li>关于我们</li></router-link>
+        </ul>
+      </div>
+    </fade-animation>
   </div>
 </template>
 
 <script>
+import FadeAnimation from 'common/Fade'
+
 export default {
   name: 'CommonHeader',
+  components: {
+    FadeAnimation
+  },
   data () {
     return {
       province: '北京市',
       city: '北京市',
-      temperature: 7
+      temperature: 7,
+      showMenu: false,
+      timer: null
+    }
+  },
+  methods: {
+    handleMenuShow () {
+      this.showMenu = true
+    },
+    handleMenuHide () {
+      let self = this
+      self.timer = setTimeout(() => {
+        this.showMenu = false
+      }, 150)
+    },
+    handleMouseEnter () {
+      clearTimeout(this.timer)
+    },
+    handleMouseLeave () {
+      this.showMenu = false
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+.header >>> .router-link-active
+  color: #fff
+
 .header
   position: fixed
-  z-index: 2
+  z-index: 99
   top: 0
   left: 0
   display: flex
@@ -75,15 +121,30 @@ export default {
     width: 100px
     height: 36px
     text-align: center
-    border: 1px solid #ddd
+    border: 1px solid #fff
     border-radius: 28px
     line-height: 36px
     font-size: 20px
-    color: #ddd
-    &:hover
-      color: #fff
-      border-color: #fff
+    color: #fff
+    cursor: pointer
     .menu-icon
       font-size: 20px
+  .menu
+    position: fixed
+    z-index: -1
+    right: 0
+    top: 0
+    bottom: 0
+    width: 130px
+    padding: 0 20px
+    box-sizing: border-box
+    background: rgba(0, 0, 0, .7)
+    color: #fff
+    ul
+      margin-top: 100px
+      color: #fff
+      li
+        line-height: 40px
+        border-bottom: 1px solid #000
 
 </style>
