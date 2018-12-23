@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="header">
     <div class="logo-wrapper">
       <img src="../assets/images/logo.png">
     </div>
@@ -10,7 +10,7 @@
       <span class="temperature">{{ temperature }}&#176;</span>
       <i class="iconfont weather-icon">&#xe7a4;</i>
     </div>
-    <div class="menu">
+    <div class="menubtn">
       <i class="iconfont menu-icon">&#xe608;</i>
       更多
     </div>
@@ -30,11 +30,17 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-.wrapper
+<style lang="stylus" scoped>
+.header
+  position: fixed
+  z-index: 2
+  top: 0
+  left: 0
   display: flex
   align-items: center
-  padding: 0 20px
+  width: 100%
+  padding: 0 14px
+  box-sizing: border-box
   height: 80px
   color: #fff
   .logo-wrapper
@@ -65,7 +71,7 @@ export default {
       font-weight: bold
     .weather-icon
       font-size: 20px
-  .menu
+  .menubtn
     width: 100px
     height: 36px
     text-align: center
@@ -74,6 +80,9 @@ export default {
     line-height: 36px
     font-size: 20px
     color: #ddd
+    &:hover
+      color: #fff
+      border-color: #fff
     .menu-icon
       font-size: 20px
 

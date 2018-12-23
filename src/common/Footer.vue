@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .footer
   margin-top: 70px
   text-align: center
@@ -42,5 +42,4 @@ export default {
       vertical-align: -4px
   .address
     line-height: 24px
-
 </style>
