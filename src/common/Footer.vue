@@ -24,7 +24,7 @@ export default {
 
 <style lang="stylus" scoped>
 .footer
-  margin-top: 70px
+  margin: 70px 0 10px 0
   text-align: center
   color: #959699
   font-size: 12px

@@ -89,6 +89,7 @@ export default {
   box-sizing: border-box
   height: 80px
   color: #fff
+  background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, 0))
   .logo-wrapper
     width: 150px
     flex: 1
