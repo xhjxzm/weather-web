@@ -3,7 +3,9 @@
     <div class="logo-wrapper">
       <img src="../assets/images/logo.png">
     </div>
-    <div class="location">
+    <div
+      class="location"
+      @mouseenter="handlePanelShow">
       <i class="iconfont location-icon">&#xe61e;</i>
       {{ province }} {{ city }}
       <em></em>
@@ -33,6 +35,64 @@
         </ul>
       </div>
     </fade-animation>
+    <div
+      class="weather-panel"
+      ref="weatherPanel">
+      <div class="panel-head">
+        <span>北京</span>
+        <span>12月29日 农历十一月廿三</span>
+        <router-link to="/home">详情
+          <i class="iconfont more-icon">&#xe66b;</i>
+        </router-link>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li>昨天</li>
+          <li>12/28</li>
+          <li>-4&#176;</li>
+          <li>晴</li>
+          <li>晴</li>
+          <li>西北风</li>
+          <li>优</li>
+        </ul>
+        <ul>
+          <li>昨天</li>
+          <li>12/28</li>
+          <li>-4&#176;</li>
+          <li>晴</li>
+          <li>晴</li>
+          <li>西北风</li>
+          <li>优</li>
+        </ul>
+        <ul>
+          <li>昨天</li>
+          <li>12/28</li>
+          <li>-4&#176;</li>
+          <li>晴</li>
+          <li>晴</li>
+          <li>西北风</li>
+          <li>优</li>
+        </ul>
+        <ul>
+          <li>昨天</li>
+          <li>12/28</li>
+          <li>-4&#176;</li>
+          <li>晴</li>
+          <li>晴</li>
+          <li>西北风</li>
+          <li>优</li>
+        </ul>
+        <ul>
+          <li>昨天</li>
+          <li>12/28</li>
+          <li>-4&#176;</li>
+          <li>晴</li>
+          <li>晴</li>
+          <li>西北风</li>
+          <li>优</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -68,6 +128,21 @@ export default {
     },
     handleMouseLeave () {
       this.showMenu = false
+    },
+    handlePanelShow () {
+      const Panel = this.$refs.weatherPanel
+      let panelTop = Panel.offsetTop
+      const self = this
+      console.log(panelTop)
+      self.timer = setInterval(() => {
+        if (panelTop > -10) {
+          clearInterval(self.timer)
+        } else {
+          panelTop += 90
+          Panel.style.top = panelTop + 'px'
+          console.log(panelTop)
+        }
+      }, 50)
     }
   }
 }
@@ -147,5 +222,31 @@ export default {
       li
         line-height: 40px
         border-bottom: 1px solid #000
-
+  .weather-panel
+    position: absolute
+    top: -370px
+    right: 30px
+    width: 500px
+    background: rgba(0, 0, 0, .7)
+    .panel-head
+      display: flex
+      justify-content: space-between
+      background: rgba(0, 0, 0, .9)
+      height: 50px
+      line-height: 50px
+      padding: 0 20px
+      .more-icon
+        font-size: 12px
+      a
+        color: #fff
+    .panel-body
+      display: flex
+      padding: 20px 0
+      ul
+        width: 100px
+        text-align: center
+        line-height: 40px
+        border-right: 1px solid #777
+        &:last-child
+          border-right: none
 </style>
